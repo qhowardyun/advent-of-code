@@ -1,0 +1,1 @@
+lines = open("15.in".)
