@@ -1,1 +1,0 @@
-#solved with excel lol
