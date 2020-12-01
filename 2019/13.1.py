@@ -17,10 +17,10 @@ while not cpu.halt:
     
     cpu.run()
 
-    while not cpu.stdout.empty():
-        x = int(cpu.stdout.get())
-        y = int(cpu.stdout.get())
-        typ = int(cpu.stdout.get())
+    while cpu.stdout:
+        x = int(cpu.stdout.pop())
+        y = int(cpu.stdout.pop())
+        typ = int(cpu.stdout.pop())
         
         if x == -1 and y == 0:
             score = typ
@@ -34,15 +34,16 @@ while not cpu.halt:
         
         
     
-    # print('\n'.join([''.join([cell for cell in row]) for row in grid]))
-    # print("Score: ", score)
+    print('\n'.join([''.join([cell for cell in row]) for row in grid]))
+    print("Score: ", score)
+    cpu.stdin.append(int(input()))
     
-    if paddlex > ballx:
-        cpu.stdin.put(-1)
-    elif paddlex < ballx:
-        cpu.stdin.put(1)
-    else:
-        cpu.stdin.put(0)
+    # if paddlex > ballx:
+    #     cpu.stdin.append(-1)
+    # elif paddlex < ballx:
+    #     cpu.stdin.append(1)
+    # else:
+    #     cpu.stdin.append(0)
     
     # input()
 

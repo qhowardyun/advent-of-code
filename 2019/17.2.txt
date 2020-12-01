@@ -1,0 +1,17 @@
+EFF
+GIHE
+EFF
+GIHE
+EFF
+GGHE
+GIHE
+GGHE
+EFF
+GGH
+
+
+
+
+EFF => A
+GIHE => B
+GGHE => C

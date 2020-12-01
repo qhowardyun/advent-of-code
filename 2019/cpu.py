@@ -1,19 +1,21 @@
-import queue
+from collections import deque
 
 class CPU():
     
     def __init__(self, tape):
-        self.tape = list(map(int, open(tape).read().strip().split(",")))
         
-        for i in range(30000):
+        with open(tape) as f:
+            self.tape = list(map(int, f.read().strip().split(",")))
+        
+        for i in range(3000):
             self.tape.append(0)
 
         self.halt = False
         self.ip = 0
         self.sp = 0
         self.mode = "Stopped"
-        self.stdout = queue.Queue()
-        self.stdin = queue.Queue()
+        self.stdout = deque()
+        self.stdin = deque()
 
     def lookup(self, i, mode):
         
@@ -25,8 +27,7 @@ class CPU():
             # print(tape[sp+i])
             return self.tape[self.sp+i]
         else:
-            print("Invalid mode: ", mode)
-            exit()    
+            print("Invalid mode: ", mode)   
 
     def run(self):
     
@@ -47,7 +48,7 @@ class CPU():
             modes.append(0)
 
             # no input available
-            if self.stdin.empty() and opcode == 3:
+            if len(self.stdin) < 1 and opcode == 3:
                 self.mode = "Waiting on input"
                 break
             
@@ -105,11 +106,11 @@ class CPU():
                 self.tape[tc] = a * b
             # input
             elif opcode == 3:
-                self.tape[ta] = int(self.stdin.get())
+                self.tape[ta] = int(self.stdin.popleft())
             # output
             elif opcode == 4:
                 # print("adding")
-                self.stdout.put(a)
+                self.stdout.appendleft(a)
             # jump if true    
             elif opcode == 5:
                 if not a == 0:
@@ -138,7 +139,6 @@ class CPU():
                 
             # halt    
             elif opcode == 99:
-                print("halt")
                 self.mode = "HALT"
                 self.halt = True
                 break
