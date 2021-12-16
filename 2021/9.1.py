@@ -58,7 +58,6 @@ def find_lowest(r, c, seen=None):
                     smallest = grid[nx][ny]
                     idx = i
         if idx == -1:
-            print(r, c, grid[r][c])
             0 / 0
         seen.add((r, c))
         return find_lowest(r + d[idx][0], c + d[idx][1], seen)

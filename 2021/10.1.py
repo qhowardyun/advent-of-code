@@ -16,7 +16,6 @@ scores = []
 
 
 def complete(stack):
-    print(stack)
     lu = {"(": 1, "[": 2, "{": 3, "<": 4}
 
     points = 0
@@ -62,7 +61,6 @@ for line in lines:
     if good:
         inc.append(line)
 
-print(inc)
 for line in inc:
     stack = []
     for char in line:

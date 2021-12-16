@@ -76,8 +76,6 @@ def find_num():
 
 last, recent = find_num()
 
-print(last, recent)
-
 winner = boards[last]
 winner_fill = filled[last]
 

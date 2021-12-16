@@ -20,8 +20,6 @@ for c in count:
         ep += "1"
         gamma += "0"
 
-print(gamma, ep)
-
 ans = int(gamma, base=2) * int(ep, base=2)
 
 submit(ans, part="a", day=3, year=2021, reopen=False)
@@ -58,8 +56,6 @@ for bit in range(len(lines[0])):
             if line[bit] == target:
                 newleast.append(line)
         least = newleast
-
-    print(bit, most, least)
 
 ls = int(most[0], base=2)
 os = int(least[0], base=2)
