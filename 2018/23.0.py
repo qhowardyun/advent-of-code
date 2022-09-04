@@ -32,16 +32,18 @@ for bot in bots:
         total += 1
 print("p1: ", total)
 
-def zabs(x):
-  return If(x >= 0,x,-x)
 
-x = Int('x')
-y = Int('y')
-z = Int('z')
+def zabs(x):
+    return If(x >= 0, x, -x)
+
+
+x = Int("x")
+y = Int("y")
+z = Int("z")
 
 # magic Z3 solver box
-isInRanges = [Int(str(i) + ' isInRange') for i in range(len(bots))]
-count = Int('sum')
+isInRanges = [Int(str(i) + " isInRange") for i in range(len(bots))]
+count = Int("sum")
 s = Optimize()
 
 for i, (bx, by, bz, br) in enumerate(bots):
@@ -49,7 +51,7 @@ for i, (bx, by, bz, br) in enumerate(bots):
     s.add(isInRanges[i] == rangeIf)
 s.add(count == sum(isInRanges))
 
-originDist = Int('dist')
+originDist = Int("dist")
 s.add(originDist == zabs(x) + zabs(y) + zabs(z))
 
 s.maximize(count)
@@ -58,3 +60,4 @@ ans = s.minimize(originDist)
 s.check()
 
 print(s.lower(ans))
+print(s.sexpr())
